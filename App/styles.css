@@ -1,0 +1,149 @@
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a24; /* Dark Dark Blue */
+    color: white;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #a67c00; /* dark yellow */
+    padding: 1rem;
+    color: white;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#burger-menu {
+    display: none;
+    background-color: #222;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 200px;
+    padding: 1rem;
+}
+
+#burger-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#burger-menu ul li {
+    margin-bottom: 1rem;
+}
+
+#burger-menu ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    background-color: #111130;
+    padding: 1rem;
+}
+
+.nav-btn {
+    background-color: #FFD700;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-btn:hover {
+    background-color: #FFC107;
+}
+
+/* Calendar styles */
+#calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+/* Colored Month Header */
+#current-month {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFDD57; /* Yellow month header */
+}
+
+#calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+#calendar-table th, #calendar-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    color: white;
+}
+
+/* Change calendar grid to black */
+#calendar-table td {
+    background-color: #000000; /* Black background */
+}
+
+/* Highlight the current day (if needed) */
+#calendar-table td.current-day {
+    background-color: rgba(255, 255, 0, 0.3); /* Slight yellow tint for current day */
+}
+
+/* Event styling */
+.event {
+    background-color: #FFC107;
+    color: black;
+    margin-top: 5px;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Goals section */
+.goal-item {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #111130;
+    border-radius: 5px;
+}
+
+.goal-label {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    margin-right: 10px;
+}
+
+/* Goal category colors */
+.label-fitness {
+    background-color: #28a745;
+}
+
+.label-academic {
+    background-color: #007bff;
+}
+
+.label-career {
+    background-color: #ff8800;
+}
+
+.label-creative {
+    background-color: #6f42c1;
+}
