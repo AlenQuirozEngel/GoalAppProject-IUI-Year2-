@@ -1,22 +1,19 @@
-/* General Styles */
+/* General styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    background-color: #0A0A24; /* Dark blue/almost black */
-    color: #FFFFFF; /* White text */
+    background-color: #0a0a24; /* Dark Dark Blue */
+    color: white;
 }
 
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #111130; /* Slightly lighter dark blue */
-    color: white;
+    background-color: #a67c00; /* dark yellow */
     padding: 1rem;
+    color: white;
 }
 
 .menu-icon {
@@ -24,81 +21,129 @@ header {
     cursor: pointer;
 }
 
-.burger-menu {
+#burger-menu {
     display: none;
+    background-color: #222;
     position: absolute;
-    top: 60px;
+    top: 50px;
     left: 0;
-    background-color: #111130; /* Same dark blue */
     width: 200px;
-    z-index: 10;
-}
-
-.burger-menu ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.burger-menu ul li {
     padding: 1rem;
 }
 
-.burger-menu ul li a {
+#burger-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#burger-menu ul li {
+    margin-bottom: 1rem;
+}
+
+#burger-menu ul li a {
     color: white;
     text-decoration: none;
 }
 
-/* Calendar Section */
 main {
-    flex-grow: 1;
-}
-
-.calendar {
-    padding: 1rem;
-    text-align: center;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    color: #FFFFFF; /* White text for table */
-}
-
-th, td {
-    padding: 10px;
-    border: 1px solid #2D2D46; /* Slightly lighter dark border */
-    text-align: center;
-}
-
-thead {
-    background-color: #1A1A3D; /* Slightly different dark blue for header */
-    color: white;
-}
-
-/* Bottom Navigation */
-.bottom-nav {
-    display: flex;
-    justify-content: space-around;
-    background-color: #111130;
-    padding: 0.5rem 0;
-    border-top: 1px solid #2D2D46; /* Subtle border */
-}
-
-.nav-btn {
-    background: none;
-    border: none;
-    font-size: 16px;
-    padding: 1rem;
-    cursor: pointer;
-    color: white;
-}
-
-.nav-btn.active {
-    color: #FFD700; /* Gold color for active button */
+    padding: 2rem;
 }
 
 footer {
+    display: flex;
+    justify-content: space-around;
     background-color: #111130;
-    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+}
+
+.nav-btn {
+    background-color: #FFD700;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-btn:hover {
+    background-color: #FFC107;
+}
+
+/* Calendar styles */
+#calendar-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+/* Colored Month Header */
+#current-month {
+    font-size: 24px;
+    font-weight: bold;
+    color: #FFDD57; /* Yellow month header */
+}
+
+#calendar-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+#calendar-table th, #calendar-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+    color: white;
+}
+
+/* Change calendar grid to black */
+#calendar-table td {
+    background-color: #000000; /* Black background */
+}
+
+/* Highlight the current day (if needed) */
+#calendar-table td.current-day {
+    background-color: rgba(255, 255, 0, 0.3); /* Slight yellow tint for current day */
+}
+
+/* Event styling */
+.event {
+    background-color: #FFC107;
+    color: black;
+    margin-top: 5px;
+    padding: 2px 4px;
+    border-radius: 3px;
+}
+
+/* Goals section */
+.goal-item {
+    padding: 10px;
+    margin-top: 10px;
+    background-color: #111130;
+    border-radius: 5px;
+}
+
+.goal-label {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    margin-right: 10px;
+}
+
+/* Goal category colors */
+.label-fitness {
+    background-color: #28a745;
+}
+
+.label-academic {
+    background-color: #007bff;
+}
+
+.label-career {
+    background-color: #ff8800;
+}
+
+.label-creative {
+    background-color: #6f42c1;
 }

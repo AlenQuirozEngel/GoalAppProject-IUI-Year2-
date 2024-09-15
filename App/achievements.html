@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achievements</title>
+    <link rel="stylesheet" href="achievements.css">
+</head>
+<body>
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <h1>Achievements</h1>
+        <nav id="burger-menu">
+            <ul>
+                <li><a href="index.html">Calendar</a></li>
+                <li><a href="goals.html">Goals</a></li>
+                <li><a href="achievements.html">Achievements</a></li>
+                <li><a href="todo.html">To-Do</a></li>
+                <li><a href="account.html">Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="achievements-content">
+            <h2>Your Achievements</h2>
+            <div id="achievement-list"></div> <!-- Circular progress bars for goals will be inserted here -->
+        </section>
+    </main>
+
+    <footer>
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="location.href='index.html'">Calendar</button>
+            <button class="nav-btn" onclick="location.href='goals.html'">Goals</button>
+            <button class="nav-btn" onclick="location.href='achievements.html'">Achievements</button>
+            <button class="nav-btn" onclick="location.href='todo.html'">To-Do</button>
+            <button class="nav-btn" onclick="location.href='account.html'">Account</button>
+        </div>
+    </footer>
+
+    <script src="achievements.js"></script>
+</body>
+</html>
