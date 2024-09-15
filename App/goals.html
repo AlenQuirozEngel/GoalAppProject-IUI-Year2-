@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Goals</title>
+    <link rel="stylesheet" href="goals.css">
+</head>
+<body>
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
+        <h1>Goals</h1>
+        <nav id="burger-menu">
+            <ul>
+                <li><a href="index.html">Calendar</a></li>
+                <li><a href="goals.html">Goals</a></li>
+                <li><a href="#" onclick="navigateTo('achievements')">Achievements</a></li>
+                <li><a href="#" onclick="navigateTo('todo')">To-Do</a></li>
+                <li><a href="#" onclick="navigateTo('account')">Account</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="goals-content">
+            <h2>Your Goals</h2>
+            <button id="add-goal-button">Add Goal</button>
+            <div id="goal-form-container"></div> <!-- Form for adding goals will be displayed here -->
+            <div id="goal-list"></div> <!-- Goals will be displayed here -->
+        </section>
+    </main>
+
+    <footer>
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="location.href='index.html'">Calendar</button>
+            <button class="nav-btn" onclick="location.href='goals.html'">Goals</button>
+            <button class="nav-btn" onclick="navigateTo('achievements')">Achievements</button>
+            <button class="nav-btn" onclick="navigateTo('todo')">To-Do</button>
+            <button class="nav-btn" onclick="navigateTo('account')">Account</button>
+        </div>
+    </footer>
+
+    <script src="goals.js"></script>
+</body>
+</html>

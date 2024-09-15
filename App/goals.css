@@ -1,0 +1,108 @@
+/* General styles for the Goals page */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0a0a24;
+    color: white;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111130;
+    padding: 1rem;
+    color: white;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#burger-menu {
+    display: none;
+    background-color: #222;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 200px;
+    padding: 1rem;
+}
+
+#burger-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#burger-menu ul li {
+    margin-bottom: 1rem;
+}
+
+#burger-menu ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    background-color: #111130;
+    padding: 1rem;
+}
+
+.nav-btn {
+    background-color: #FFD700;
+    color: black;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.nav-btn:hover {
+    background-color: #FFC107;
+}
+
+/* Styles for the goals list */
+#goal-list .goal-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #111130;
+    border-radius: 5px;
+    color: white;
+}
+
+/* Color Grading for Labels */
+.label-fitness {
+    background: linear-gradient(to right, #56ab2f, #a8e063); /* Green gradient */
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.label-academic {
+    background: linear-gradient(to right, #36d1dc, #5b86e5); /* Blue gradient */
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.label-career {
+    background: linear-gradient(to right, #f7971e, #ffd200); /* Orange gradient */
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.label-creative {
+    background: linear-gradient(to right, #9d50bb, #6e48aa); /* Purple gradient */
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+}
