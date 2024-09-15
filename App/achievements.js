@@ -4,21 +4,19 @@ function getStoredGoals() {
     return goals;
 }
 
-// Function to render the circular progress bars for each goal
+// Function to render the progress bars and achievement boxes
 function renderAchievements() {
     const achievementList = document.getElementById('achievement-list');
     const goals = getStoredGoals();
 
     achievementList.innerHTML = ''; // Clear previous entries
 
+    // Render progress bars for goals
     goals.forEach(goal => {
         const progress = goal.progress || 0; // Default progress is 0
 
         const progressContainer = document.createElement('div');
         progressContainer.classList.add('progress-container');
-
-        const circle = document.createElement('div');
-        circle.classList.add('progress-circle');
 
         const label = document.createElement('div');
         label.classList.add('progress-label');
@@ -27,15 +25,43 @@ function renderAchievements() {
             ${progress}% Complete
         `;
 
-        const progressValue = document.createElement('div');
-        progressValue.classList.add('progress-value');
-        progressValue.style.background = `conic-gradient(#00ff00 ${progress * 3.6}deg, #eee 0deg)`; // Conic gradient for progress
+        const progressBar = document.createElement('div');
+        progressBar.classList.add('progress-bar');
+        const progressFill = document.createElement('div');
+        progressFill.classList.add('progress-fill');
+        progressFill.style.width = `${progress}%`;
 
-        progressContainer.appendChild(circle);
-        progressContainer.appendChild(progressValue);
+        progressBar.appendChild(progressFill);
         progressContainer.appendChild(label);
+        progressContainer.appendChild(progressBar);
         achievementList.appendChild(progressContainer);
     });
+
+    // Render achievement boxes (icons can be added later)
+    const achievementsSection = document.createElement('div');
+    achievementsSection.classList.add('achievements-section');
+
+    const achievement1 = document.createElement('div');
+    achievement1.classList.add('achievement-box');
+    achievement1.innerHTML = `
+        <div class="achievement-icon"></div>
+        <p>Hyper-Achiever</p>
+        <small>Completed 10 goals</small>
+    `;
+
+    const achievement2 = document.createElement('div');
+    achievement2.classList.add('achievement-box');
+    achievement2.innerHTML = `
+        <div class="achievement-icon"></div>
+        <p>Dedicated</p>
+        <small>Stay on track for 100 days</small>
+    `;
+
+    achievementsSection.appendChild(achievement1);
+    achievementsSection.appendChild(achievement2);
+
+    // Append the achievements section to the list
+    achievementList.appendChild(achievementsSection);
 }
 
 // Load achievements on page load
