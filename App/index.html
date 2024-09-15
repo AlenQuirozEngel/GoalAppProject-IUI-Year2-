@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goal Planner App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="menu-icon" id="menu-icon" onclick="toggleMenu()">
+            &#9776;
+        </div>
+        <nav id="burger-menu" class="burger-menu">
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Goals</a></li>
+                <li><a href="#">To-Do</a></li>
+                <li><a href="#">Achievements</a></li>
+                <li><a href="#">Settings</a></li>
+            </ul>
+        </nav>
+        <h1>My Planner</h1>
+    </header>
+
+    <main>
+        <section class="calendar">
+            <!-- Calendar Placeholder -->
+            <div id="calendar">
+                <h2>September 2024</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sun</th>
+                            <th>Mon</th>
+                            <th>Tue</th>
+                            <th>Wed</th>
+                            <th>Thu</th>
+                            <th>Fri</th>
+                            <th>Sat</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- You can fill in the dates here -->
+                        <tr>
+                            <td></td>
+                            <td>1</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>6</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>8</td>
+                            <td>9</td>
+                            <td>10</td>
+                            <td>11</td>
+                            <td>12</td>
+                            <td>13</td>
+                        </tr>
+                        <!-- Continue with the calendar rows -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="bottom-nav">
+            <button class="nav-btn" onclick="navigate('goals')">Goals</button>
+            <button class="nav-btn" onclick="navigate('todo')">To-Do</button>
+            <button class="nav-btn active" onclick="navigate('calendar')">Calendar</button>
+            <button class="nav-btn" onclick="navigate('achievements')">Achievements</button>
+            <button class="nav-btn" onclick="navigate('settings')">Settings</button>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>

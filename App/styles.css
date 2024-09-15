@@ -1,0 +1,104 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #0A0A24; /* Dark blue/almost black */
+    color: #FFFFFF; /* White text */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #111130; /* Slightly lighter dark blue */
+    color: white;
+    padding: 1rem;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.burger-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    background-color: #111130; /* Same dark blue */
+    width: 200px;
+    z-index: 10;
+}
+
+.burger-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.burger-menu ul li {
+    padding: 1rem;
+}
+
+.burger-menu ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Calendar Section */
+main {
+    flex-grow: 1;
+}
+
+.calendar {
+    padding: 1rem;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #FFFFFF; /* White text for table */
+}
+
+th, td {
+    padding: 10px;
+    border: 1px solid #2D2D46; /* Slightly lighter dark border */
+    text-align: center;
+}
+
+thead {
+    background-color: #1A1A3D; /* Slightly different dark blue for header */
+    color: white;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    background-color: #111130;
+    padding: 0.5rem 0;
+    border-top: 1px solid #2D2D46; /* Subtle border */
+}
+
+.nav-btn {
+    background: none;
+    border: none;
+    font-size: 16px;
+    padding: 1rem;
+    cursor: pointer;
+    color: white;
+}
+
+.nav-btn.active {
+    color: #FFD700; /* Gold color for active button */
+}
+
+footer {
+    background-color: #111130;
+    box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.1);
+}
