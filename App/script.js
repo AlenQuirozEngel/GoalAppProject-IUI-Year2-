@@ -57,7 +57,6 @@ function listUpcomingEvents() {
     });
 }
 
-// Display the calendar for the current month with events
 function displayCalendar(month, year, events = []) {
     const calendarBody = document.getElementById('calendar-body');
     const currentMonthLabel = document.getElementById('current-month');
@@ -75,16 +74,24 @@ function displayCalendar(month, year, events = []) {
             if (i === 0 && j < firstDayOfMonth) {
                 cell.innerHTML = ''; // Empty cells before the first day
             } else if (date <= daysInMonth) {
+                const currentDate = date; // Capture the correct date for each cell
                 const dayEvents = events.filter(event => {
                     const eventDate = new Date(event.start.dateTime || event.start.date);
-                    return eventDate.getDate() === date && eventDate.getMonth() === month && eventDate.getFullYear() === year;
+                    return eventDate.getDate() === currentDate && eventDate.getMonth() === month && eventDate.getFullYear() === year;
                 });
-                cell.innerHTML = `<div>${date}</div>`;
+
+                cell.innerHTML = `<div>${currentDate}</div>`;
                 if (dayEvents.length > 0) {
                     dayEvents.forEach(event => {
                         cell.innerHTML += `<div class="event">${event.summary}</div>`;
                     });
                 }
+
+                // Add event listener to switch to daily view on day click
+                cell.addEventListener('click', () => {
+                    displayDailyCalendar(currentDate, month, year, dayEvents);
+                });
+
                 date++;
             } else {
                 cell.innerHTML = ''; // Empty cells after the last day
@@ -93,6 +100,45 @@ function displayCalendar(month, year, events = []) {
         }
         calendarBody.appendChild(row);
         if (date > daysInMonth) break;
+    }
+}
+
+function displayDailyCalendar(day, month, year, events = []) {
+    const mainContent = document.getElementById('main-content');
+    const selectedDate = new Date(year, month, day);
+
+    mainContent.innerHTML = `
+        <div id="daily-calendar-navigation">
+            <button onclick="loadCalendar(document.getElementById('main-content'))">Back to Month</button>
+            <h2>${getMonthName(month)} ${day}, ${year}</h2>
+        </div>
+        <div id="daily-calendar"></div>
+    `;
+
+    const dailyCalendar = document.getElementById('daily-calendar');
+
+    // Create 24-hour time slots
+    for (let hour = 0; hour < 24; hour++) {
+        const hourBlock = document.createElement('div');
+        hourBlock.className = 'hour-block';
+        hourBlock.innerHTML = `<div class="hour-label">${hour}:00</div>`;
+
+        const hourEvents = events.filter(event => {
+            const eventStart = new Date(event.start.dateTime || event.start.date);
+            return eventStart.getHours() === hour && eventStart.getDate() === day;
+        });
+
+        // Add events for the corresponding hour
+        if (hourEvents.length > 0) {
+            hourEvents.forEach(event => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'event';
+                eventDiv.innerText = `${event.summary} (${new Date(event.start.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`;
+                hourBlock.appendChild(eventDiv);
+            });
+        }
+
+        dailyCalendar.appendChild(hourBlock);
     }
 }
 
