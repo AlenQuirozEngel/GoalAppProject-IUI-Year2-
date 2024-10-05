@@ -1,89 +1,351 @@
 /* General styles */
+/* Global body styles */
+body.dark-mode {
+    background-color: #0a0a24;
+    color: white;
+}
+
+body.light-mode {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #0a0a24; /* Dark Dark Blue */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Light and dark modes */
+body.dark-mode {
+    background-color: #0a0a24;
     color: white;
 }
 
+body.light-mode {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Header layout: Burger menu, month navigation, and toggle */
+/* Header layout */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #a67c00; /* dark yellow */
     padding: 1rem;
+    background-color: indigo; /* or another color depending on light/dark mode */
     color: white;
+    position: relative;
 }
 
-.menu-icon {
-    font-size: 24px;
+/* Right section for the toggle button and logo */
+.right-section {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Space between toggle and logo */
+}
+
+/* Dark/Light mode toggle button */
+.toggle-theme-btn {
+    background: none;
+    border: none;
+    color: white;
     cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px;
 }
 
+/* Logo container */
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Forcefully resize the logo */
+.logo {
+    max-width: 60px;  /* Set a maximum width */
+    max-height: 60px; /* Set a maximum height */
+    width: auto;       /* Maintain aspect ratio */
+    height: auto;      /* Maintain aspect ratio */
+    object-fit: contain; /* Ensure it scales without distortion */
+    border-radius: 50%; /* Makes the logo round */
+    border: 2px solid black; /* Optional: Add a border around the logo */
+}
+
+
+
+/* Dark mode toggle styling */
+body.light-mode .toggle-theme-btn {
+    color: black;
+}
+
+/* Optional hover effect */
+.toggle-theme-btn:hover {
+    color: #ffdd57;
+}
+
+/* Center the calendar navigation (Previous, Month, Next) */
+.calendar-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /* Allow the calendar navigation to expand and center in the header */
+    text-align: center;
+}
+
+/* Ensure the current month is centered between the buttons */
+#current-month {
+    font-size: 24px;
+    font-weight: bold;
+    margin: 0 20px; /* Add space between the buttons and the month */
+}
+
+/* Base styling for all buttons (including the header and "Back to Month") */
+.nav-btn {
+    background-color: #87CEEB; /* Light blue for light mode */
+    color: black;
+    border: none;
+    width: 120px; /* Set consistent width */
+    height: 45px;  /* Set consistent height */
+    padding: 10px; /* Adjust padding */
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    text-align: center;
+    font-size: 16px; /* Ensure consistent font size */
+}
+
+/* Dark mode color for buttons */
+body.dark-mode .nav-btn {
+    background-color: #ccff99; /* Lime color for dark mode */
+    color: black; /* Text color */
+}
+
+/* Optional hover effect */
+.nav-btn:hover {
+    background-color: #f0f0f0; /* Light gray hover effect */
+}
+
+body.dark-mode .nav-btn:hover {
+    background-color: #b3ff66; /* Lighter lime hover effect */
+}
+
+
+/* Burger menu styling remains unchanged */
+.McButton {
+    cursor: pointer;
+    margin-left: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Dark/Light mode toggle on the right */
+.toggle-theme-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+body.light-mode .toggle-theme-btn {
+    color: black;
+}
+
+/* Burger Menu on the left */
+.McButton {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.McButton b {
+    width: 30px;
+    height: 3px;
+    background-color: #87CEEB; /* Light blue for light mode */
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode for burger menu */
+body.dark-mode .McButton b {
+    background-color: #ccff99; /* Lime for dark mode */
+}
+
+/* Toggle theme button on the right */
+.toggle-theme-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+body.light-mode .toggle-theme-btn {
+    color: black;
+}
+
+.toggle-theme-btn:hover {
+    color: #ffdd57;
+}
+
+/* Toggle theme button */
+.toggle-theme-btn {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.toggle-theme-btn:hover {
+    color: #ffdd57;
+}
+
+/* Burger Menu icon */
+.McButton {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000; /* Make sure it's on top */
+}
+
+.McButton b {
+    width: 30px;
+    height: 3px;
+    background-color: #87CEEB; /* Light blue for light mode */
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Dark mode for burger icon */
+body.dark-mode .McButton b {
+    background-color: #ccff99; /* Lime in dark mode */
+}
+
+/* Active state for the burger icon (spins the bars) */
+.McButton.active b:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+.McButton.active b:nth-child(2) {
+    opacity: 0;
+}
+.McButton.active b:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Hide the burger menu by default */
 #burger-menu {
     display: none;
-    background-color: #222;
     position: absolute;
-    top: 50px;
-    left: 0;
-    width: 200px;
+    top: 60px;
+    left: 20px;
+    background-color: #333;
     padding: 1rem;
+    border-radius: 8px;
+    z-index: 999; /* Ensure it’s visible above other content */
 }
 
+/* Show the burger menu when active */
+.McButton.active + #burger-menu {
+    display: block;
+    animation: fadeIn 0.4s forwards; /* Smooth fade-in */
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Burger menu items */
 #burger-menu ul {
     list-style: none;
     padding: 0;
 }
 
 #burger-menu ul li {
-    margin-bottom: 1rem;
+    margin-bottom: 10px;
 }
 
 #burger-menu ul li a {
     color: white;
     text-decoration: none;
+    font-size: 16px;
 }
 
-main {
-    padding: 2rem;
+#burger-menu ul li a:hover {
+    text-decoration: underline;
 }
 
-footer {
+/* Specific styles for the "Back to Month" button */
+.back-btn {
+    width: 100px; /* Make it square */
+    height: 100px; /* Make it square */
+    font-size: 18px; /* Increase font size */
+    text-align: center;
     display: flex;
-    justify-content: space-around;
-    background-color: #111130;
-    padding: 1rem;
+    justify-content: center;
+    align-items: center; /* Center text inside */
 }
 
-.nav-btn {
-    background-color: #FFD700;
-    color: black;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
+/* Dark mode styling for the back button */
+body.dark-mode .back-btn {
+    background-color: #ccff99; /* Lime color for dark mode */
 }
+
+/* Light mode styling for the back button */
+body.light-mode .back-btn {
+    background-color: #87CEEB; /* Light blue for light mode */
+}
+
+/* Optional: Add hover effect for the button */
+.nav-btn:hover {
+    background-color: #f0f0f0; /* Light gray hover effect for light mode */
+}
+
+body.dark-mode .nav-btn:hover {
+    background-color: #b3ff66; /* Lighter lime hover effect for dark mode */
+}
+
+/* Bottom navigation buttons */
+.bottom-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px; /* Space between buttons */
+    width: fit-content; /* Match the width of the buttons to content size */
+    margin: 0 auto; /* Center the bottom-nav within the page */
+    background-color: white;
+    padding: 1rem;
+    border-radius: 50px; /* Small rounded shape */
+}
+
+body.dark-mode .bottom-nav {
+    background-color: #3f0699; /* Dark purple for dark mode */
+}
+
 
 .nav-btn:hover {
-    background-color: #FFC107;
+    background-color: #f0f0f0;
 }
 
-/* Calendar styles */
-#calendar-navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-}
-
-/* Colored Month Header */
-#current-month {
-    font-size: 24px;
-    font-weight: bold;
-    color: #FFDD57; /* Yellow month header */
-}
-
+/* Calendar styles with rounded corners */
 #calendar-table {
     width: 100%;
     border-collapse: collapse;
@@ -94,56 +356,115 @@ footer {
     padding: 10px;
     border: 1px solid #ccc;
     text-align: center;
-    color: white;
+    border-radius: 8px;
 }
 
-/* Change calendar grid to black */
+
 #calendar-table td {
-    background-color: #000000; /* Black background */
+    background-color: #000000;
 }
 
-/* Highlight the current day (if needed) */
-#calendar-table td.current-day {
-    background-color: rgba(255, 255, 0, 0.3); /* Slight yellow tint for current day */
+/* Calendar cells (squares) in dark mode */
+body.dark-mode #calendar-table td {
+    background-color: black; /* Black background for dark mode */
+    color: white; /* White text for dark mode */
 }
+
+/* Calendar cells (squares) in light mode */
+body.light-mode #calendar-table td {
+    background-color: #FFFFE0; /* Light yellow background for light mode */
+    color: black; /* Black text for light mode */
+}
+
+/* Optional: Hover effect for calendar cells */
+#calendar-table td:hover {
+    opacity: 0.8; /* Slightly transparent on hover */
+}
+
+/* Optional: Hover effect for calendar cells in dark mode */
+body.dark-mode #calendar-table td:hover {
+    background-color: #333; /* A brighter black (dark gray) on hover */
+    opacity: 1; /* Full opacity */
+    cursor: pointer; /* Pointer cursor to indicate interactivity */
+}
+
 
 /* Event styling */
 .event {
     background-color: #FFC107;
     color: black;
     margin-top: 5px;
-    padding: 2px 4px;
-    border-radius: 3px;
-}
-
-/* Goals section */
-.goal-item {
-    padding: 10px;
-    margin-top: 10px;
-    background-color: #111130;
-    border-radius: 5px;
-}
-
-.goal-label {
     padding: 5px 10px;
-    border-radius: 5px;
-    color: white;
-    margin-right: 10px;
+    border-radius: 8px;
+}
+/* Slider toggle switch */
+.toggle-theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Width of the slider */
+    height: 25px; /* Height of the slider */
+    margin-right: 10px; /* Space on the right for layout */
 }
 
-/* Goal category colors */
-.label-fitness {
-    background-color: #28a745;
+/* Hide the default checkbox input */
+.toggle-theme-switch input {
+    display: none;
 }
 
-.label-academic {
-    background-color: #007bff;
+/* The slider track (background stays indigo, but border changes) */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: black; /* Indigo background for both modes */
+    transition: 0.4s;
+    border-radius: 30px; /* Fully rounded slider (cylinder shape) */
+    border: 2px solid #87CEEB; /* Light blue border for light mode */
 }
 
-.label-career {
-    background-color: #ff8800;
+/* The ball inside the slider */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px; /* Adjusted size to fit perfectly inside the slider */
+    width: 18px;  /* Make the ball slightly smaller than the slider's height */
+    left: 2px; /* Start position of the ball */
+    bottom: 2px;
+    background-color: #ccff99; /* Default color for dark mode */
+    transition: 0.4s;
+    border-radius: 50%; /* Make it circular */
 }
 
-.label-creative {
-    background-color: #6f42c1;
+/* When the checkbox is checked (dark mode) */
+input:checked + .slider {
+    border-color: #ccff99; /* Lime green border for dark mode */
+}
+
+
+/* Move the ball to the right and change its color */
+input:checked + .slider:before {
+    transform: translateX(24px); /* Move the ball to the right (adjusted value) */
+    background-color: #87CEEB; /* ball in light mode */
+}
+
+/* Light mode ball color */
+body.light-mode input:not(:checked) + .slider:before {
+    background-color: #87CEEB; /* Light blue ball in light mode */
+}
+
+/* Light mode border color */
+body.light-mode .slider {
+    border-color: #87CEEB; /* Light blue border for light mode */
+}
+
+/* Dark mode ball and border color */
+body.dark-mode .slider {
+    border-color: #ccff99; /* Lime green border for dark mode */
+}
+
+body.dark-mode .slider:before {
+    background-color: #ccff99; /* Lime green ball in dark mode */
 }

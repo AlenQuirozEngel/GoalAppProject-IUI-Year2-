@@ -4,36 +4,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dream Chaser</title>
-    
     <link rel="stylesheet" href="styles.css">
+    <!-- Add jQuery and Velocity.js in your project -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.min.js"></script>
 </head>
-<body>
+<body class="dark-mode">
+    
+    
     <header>
-        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-        <h1>Dream Chaser</h1>
+        <script src="script.js"></script>
+
+        <!-- Burger Menu on the left -->
+        <div class="McButton" data="hamburger-menu">
+            <b></b>
+            <b></b>
+            <b></b>
+            <b></b>
+            
+        </div>
+
+        <!-- Month Navigation in the center -->
+        <div class="calendar-navigation">
+
+            <button class="nav-btn" onclick="changeDate(-1)">Past</button>
+
+            <h2 id="current-month"></h2>
+
+            <button class="nav-btn" onclick="changeDate(1)">Upcoming</button>
+        </div>
+        
+
+         <!-- Dark/Light Mode Toggle and Logo on the right -->
+        <div class="right-section">
+            
+            <!-- Toggle Dark/Light Mode -->
+            <label class="toggle-theme-switch">
+                <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
+                <span class="slider"></span>
+            </label>
+
+            <div class="logo-container">
+                <img src="Assets/Logo.png" class="logo"> <!-- Logo -->
+            </div>
+        </div>
+
         <nav id="burger-menu">
             <ul>
-                <li><a href="#" onclick="navigateTo('calendar')">Calendar</a></li>
-                <li><a href="goals.html">Goals</a></li> <!-- Linking to the new goals page -->
-                <li><a href="#" onclick="navigateTo('achievements')">Achievements</a></li>
-                <li><a href="#" onclick="navigateTo('todo')">To-Do</a></li>
-                <li><a href="#" onclick="navigateTo('account')">Account</a></li>
+                <li><a href="index.html">Calendar</a></li>
+                <li><a href="achievements.html">Achievements</a></li>
+                <li><a href="todo.html">To-Do</a></li>
+                <li><a href="account.html">Account</a></li>
             </ul>
         </nav>
     </header>
+    
+
+    
 
     <main>
         <section id="main-content">
             <!-- Dynamic content will be loaded here -->
+
         </section>
-        
+
     </main>
 
     <footer>
         <div class="bottom-nav">
             <button class="nav-btn" onclick="location.href='index.html'">Calendar</button>
             <button class="nav-btn" onclick="location.href='goals.html'">Goals</button>
-            <button class="nav-btn" onclick="location.href='achievements.html'">Achievements</button> <!-- Link to achievements -->
+            <button class="nav-btn" onclick="location.href='achievements.html'">Achievements</button>
             <button class="nav-btn" onclick="location.href='todo.html'">To-Do</button>
             <button class="nav-btn" onclick="location.href='account.html'">Account</button>
         </div>
@@ -43,5 +84,6 @@
     <!-- Google API -->
     <script async defer src="https://apis.google.com/js/api.js"></script>
     <script src="script.js"></script>
+
 </body>
 </html>

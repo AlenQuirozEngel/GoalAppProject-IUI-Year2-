@@ -1,76 +1,200 @@
-/* General styles for the Goals page */
+/* General body styles */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+body.dark-mode {
     background-color: #0a0a24;
     color: white;
 }
 
+body.light-mode {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+/* Header Layout */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #111130;
     padding: 1rem;
+    background-color: indigo;
     color: white;
 }
 
-.menu-icon {
-    font-size: 24px;
-    cursor: pointer;
-}
-
-#burger-menu {
-    display: none;
-    background-color: #222;
-    position: absolute;
-    top: 50px;
-    left: 0;
-    width: 200px;
-    padding: 1rem;
-}
-
-#burger-menu ul {
-    list-style: none;
-    padding: 0;
-}
-
-#burger-menu ul li {
-    margin-bottom: 1rem;
-}
-
-#burger-menu ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-main {
-    padding: 2rem;
-}
-
-footer {
+/* Right section for toggle and logo */
+.right-section {
     display: flex;
-    justify-content: space-around;
-    background-color: #111130;
-    padding: 1rem;
+    align-items: center;
+    gap: 10px;
 }
 
+/* Center "Your Goals" in the middle of the header */
+h1 {
+    text-align: center;
+    flex-grow: 1;
+    margin: 0;
+}
+
+/* Burger Menu and Logo */
+.McButton {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    margin-left: 10px;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
+}
+
+.McButton b {
+    width: 30px;
+    height: 3px;
+    background-color: #87CEEB; /* Light blue for light mode */
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode .McButton b {
+    background-color: #ccff99; /* Lime green for dark mode */
+}
+
+/* Spin animation for burger menu */
+.McButton.active b:nth-child(1) {
+    transform: translateY(10px) rotate(45deg);
+}
+
+.McButton.active b:nth-child(2) {
+    opacity: 0;
+}
+
+.McButton.active b:nth-child(3) {
+    transform: translateY(-10px) rotate(-45deg);
+}
+
+/* Logo container */
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+
+/* Toggle theme styling */
+.toggle-theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+    margin-right: 10px;
+}
+
+.toggle-theme-switch input {
+    display: none;
+}
+
+/* Slider track */
+.slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000; /* Black for dark mode */
+    transition: 0.4s;
+    border-radius: 30px;
+    border: 2px solid #ccff99; /* Lime border in dark mode */
+}
+
+/* Light and dark mode slider border colors */
+body.light-mode .slider {
+    background-color: #fff; /* White for light mode */
+    border-color: #87CEEB;  /* Light blue border */
+}
+
+body.dark-mode .slider {
+    background-color: #000; /* Black background for dark mode */
+    border-color: #ccff99;  /* Lime border */
+}
+
+/* Ball inside the slider */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 2px;
+    bottom: 2px;
+    background-color: #ccff99; /* Lime green for dark mode */
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+/* Light mode ball */
+body.light-mode .slider:before {
+    background-color: #87CEEB; /* Light blue for light mode */
+}
+
+/* Move the ball when checked (light/dark toggle) */
+input:checked + .slider:before {
+    transform: translateX(24px); /* Slide to the right */
+}
+
+/* Footer Navigation */
+.bottom-nav {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 50px;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+body.dark-mode .bottom-nav {
+    background-color: #3f0699;
+}
+
+/* Button Styles */
 .nav-btn {
-    background-color: #FFD700;
+    background-color: #87CEEB;
     color: black;
     border: none;
-    padding: 10px 20px;
+    width: 120px;
+    height: 45px;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
-.nav-btn:hover {
-    background-color: #FFC107;
+body.dark-mode .nav-btn {
+    background-color: #ccff99;
 }
 
-/* Styles for the goals list */
-#goal-list .goal-item {
+/* Green Button */
+.green-btn {
+    background-color: #87CEEB;
+}
+
+.green-btn:hover {
+    background-color: #66b3cc;
+}
+
+
+/* Goal List Styling */
+.goal-item {
     padding: 10px;
     margin-bottom: 10px;
     background-color: #111130;
@@ -78,31 +202,128 @@ footer {
     color: white;
 }
 
-/* Color Grading for Labels */
+/* Label colors for goals */
 .label-fitness {
-    background: linear-gradient(to right, #56ab2f, #a8e063); /* Green gradient */
+    background: linear-gradient(to right, #56ab2f, #a8e063);
     color: white;
     padding: 5px;
     border-radius: 5px;
 }
 
 .label-academic {
-    background: linear-gradient(to right, #36d1dc, #5b86e5); /* Blue gradient */
+    background: linear-gradient(to right, #36d1dc, #5b86e5);
     color: white;
     padding: 5px;
     border-radius: 5px;
 }
 
 .label-career {
-    background: linear-gradient(to right, #f7971e, #ffd200); /* Orange gradient */
+    background: linear-gradient(to right, #f7971e, #ffd200);
     color: white;
     padding: 5px;
     border-radius: 5px;
 }
 
 .label-creative {
-    background: linear-gradient(to right, #9d50bb, #6e48aa); /* Purple gradient */
+    background: linear-gradient(to right, #9d50bb, #6e48aa);
     color: white;
     padding: 5px;
     border-radius: 5px;
+}
+
+/* Hide the burger menu by default */
+#burger-menu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    left: 20px;
+    background-color: #333;
+    padding: 1rem;
+    border-radius: 8px;
+    z-index: 999;
+}
+
+/* Show the burger menu when McButton is active */
+.McButton.active + #burger-menu {
+    display: block;
+    animation: fadeIn 0.4s forwards;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Styling for Ranked and Unranked Goal sections */
+h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #87CEEB; /* Light blue color for light mode */
+}
+
+body.dark-mode h3 {
+    color: #ccff99; /* Lime green color for dark mode */
+}
+
+/* Ensure ranked/unranked sections are displayed correctly */
+#ranked-goal-list, #unranked-goal-list {
+    display: block;
+    padding: 10px;
+    background-color: #f0f0f0; /* Light background for goals */
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+body.dark-mode #ranked-goal-list, body.dark-mode #unranked-goal-list {
+    background-color: #333; /* Dark background for dark mode */
+}
+
+/* Goal item styles */
+.goal-item {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer; /* Indicate interactivity */
+}
+
+/* Cherry Red Remove Button */
+.nav-btn.red-btn {
+    background-color: #FF4500; /* Cherry red color */
+    color: white; /* Ensure text is white for contrast */
+    border: none;
+    width: 120px;
+    height: 45px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    float: right;
+}
+
+/* Hover effect */
+.nav-btn.red-btn:hover {
+    background-color: #d43300; /* Darker cherry red on hover */
+}
+.nav-btn.red-btn {
+    background-color: #FF4500 !important;
+}
+
+
+/* Message when in remove mode */
+#remove-message {
+    color: #ff4500; /* Cherry red message */
+    font-size: 16px;
+    margin-top: 10px;
+    text-align: center;
+}
+.goal-item {
+    flex: 1 1 auto; /* Ensure it expands based on content */
 }

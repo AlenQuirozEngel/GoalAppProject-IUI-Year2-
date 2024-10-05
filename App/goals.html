@@ -6,41 +6,80 @@
     <title>Your Goals</title>
     <link rel="stylesheet" href="goals.css">
 </head>
-<body>
+<body class="dark-mode"> <!-- Initially in dark mode -->
+    <!-- Header Section -->
     <header>
-        <div class="menu-icon" onclick="toggleMenu()">&#9776;</div>
-        <h1>Goals</h1>
-        <nav id="burger-menu">
-            <ul>
-                <li><a href="index.html">Calendar</a></li>
-                <li><a href="goals.html">Goals</a></li>
-                <li><a href="#" onclick="navigateTo('achievements')">Achievements</a></li>
-                <li><a href="#" onclick="navigateTo('todo')">To-Do</a></li>
-                <li><a href="#" onclick="navigateTo('account')">Account</a></li>
-            </ul>
-        </nav>
+        <!-- Burger Menu -->
+        <div class="McButton" data="hamburger-menu">
+            <b></b>
+            <b></b>
+            <b></b>
+        </div>
+
+        <!-- Centered Title -->
+        <h1>Your Goals</h1>
+
+        <!-- Right Section: Toggle and Logo -->
+        <div class="right-section">
+            <label class="toggle-theme-switch">
+                <input type="checkbox" id="theme-toggle">
+                <span class="slider"></span>
+            </label>
+            <div class="logo-container">
+                <img src="Assets/Logo.png" class="logo">
+            </div>
+        </div>
     </header>
 
+    <!-- Burger Menu (Hidden by Default) -->
+    <nav id="burger-menu">
+        <ul>
+            <li><a href="index.html">Calendar</a></li>
+            <li><a href="goals.html">Goals</a></li>
+            <li><a href="achievements.html">Achievements</a></li>
+            <li><a href="todo.html">To-Do</a></li>
+            <li><a href="account.html">Account</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Section -->
     <main>
-        <section id="goals-content">
-            <h2>Your Goals</h2>
-            <button id="add-goal-button">Add Goal</button>
-            <div id="goal-form-container"></div> <!-- Form for adding goals will be displayed here -->
-            <div id="goal-list"></div> <!-- Goals will be displayed here -->
+        <div class="goal-actions">
+            <!-- Add Goal Button -->
+            <button class="nav-btn green-btn" id="add-goal-btn">Add Goal</button>
+            <!-- Remove Goal Button -->
+            <button class="nav-btn red-btn" id="remove-goal-btn" style="float: right;">Remove Goal</button>
+        </div>
+    
+        <!-- Form to add goals -->
+        <section id="goal-form-container"></section> <!-- Goal form will appear here -->
+    
+        <!-- Ranked and Unranked Goal Sections -->
+        <section id="ranked-goals">
+            <h3>Ranked Goals</h3>
+            <div id="ranked-goal-list"></div>
+        </section>
+    
+        <section id="unranked-goals">
+            <h3>Unranked Goals</h3>
+            <div id="unranked-goal-list"></div>
         </section>
     </main>
+    
 
+    <!-- Footer with Centered Buttons -->
     <footer>
         <div class="bottom-nav">
             <button class="nav-btn" onclick="location.href='index.html'">Calendar</button>
             <button class="nav-btn" onclick="location.href='goals.html'">Goals</button>
             <button class="nav-btn" onclick="location.href='achievements.html'">Achievements</button>
-            <button class="nav-btn" onclick="navigateTo('todo')">To-Do</button>
-            <button class="nav-btn" onclick="navigateTo('account')">Account</button>
-
+            <button class="nav-btn" onclick="location.href='todo.html'">To-Do</button>
+            <button class="nav-btn" onclick="location.href='account.html'">Account</button>
         </div>
     </footer>
 
     <script src="goals.js"></script>
+    <script src="script.js"></script> <!-- External script.js to handle the toggle and burger menu -->
 </body>
 </html>
+
