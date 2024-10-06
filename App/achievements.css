@@ -1,4 +1,5 @@
 /* General styles for achievements */
+/* General styles for achievements */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -14,6 +15,75 @@ header {
     background-color: #111130;
     padding: 1rem;
     color: white;
+}
+
+#achievement-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.progress-container {
+    width: 120px;
+    text-align: center;
+    margin: 10px;
+}
+
+.progress-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    position: relative;
+    background-color: #111130;
+    border: 2px solid #333;
+}
+
+.progress-value {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: #00ff00;
+}
+
+.progress-label {
+    margin-top: 10px;
+}
+
+.menu-icon {
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#burger-menu {
+    display: none;
+    background-color: #222;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 200px;
+    padding: 1rem;
+}
+
+#burger-menu ul {
+    list-style: none;
+    padding: 0;
+}
+
+#burger-menu ul li {
+    margin-bottom: 1rem;
+}
+
+#burger-menu ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 2rem;
 }
 
 footer {
@@ -38,65 +108,9 @@ footer {
 
 /* Achievements Section */
 #achievement-list {
-    margin-top: 20px;
-}
-
-.progress-container {
-    width: 100%;
-    margin-bottom: 20px;
-}
-
-.progress-label {
-    margin-bottom: 10px;
-    font-size: 16px;
-}
-
-.progress-bar {
-    width: 100%;
-    background-color: #333;
-    border-radius: 5px;
-    overflow: hidden;
-    height: 20px;
-    position: relative;
-}
-
-.progress-fill {
-    height: 100%;
-    background-color: #FFD700; /* Yellow fill for progress */
-    transition: width 0.4s ease;
-}
-
-/* Achievement Boxes */
-.achievements-section {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    margin-top: 30px;
+    margin-top: 20px;
 }
 
-.achievement-box {
-    background-color: #333;
-    width: 150px;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    margin-bottom: 20px;
-    color: white;
-}
-
-.achievement-box p {
-    font-size: 18px;
-    margin: 10px 0 5px;
-}
-
-.achievement-box small {
-    color: #bbb;
-}
-
-.achievement-icon {
-    background-color: #666;
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    margin: 0 auto 10px;
-}

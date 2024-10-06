@@ -8,14 +8,12 @@ const SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 let currentMonth = new Date().getMonth();
 let currentYear = new Date().getFullYear();
 let googleSignedIn = false;
+let currentView = 'month';
+let currentDay = new Date().getDate();
 
-// Initialize the Google API
 function handleClientLoad() {
     gapi.load('client:auth2', initClient);
 }
-
-let currentView = 'month'; // 'month' for month view, 'day' for day view
-let currentDay = new Date().getDate(); // Track the current day for day view
 
 function initClient() {
     gapi.client.init({
@@ -40,7 +38,6 @@ function updateSigninStatus(isSignedIn) {
     }
 }
 
-// generic Fetch events from Google Calendar for the current month/day
 function fetchEvents(timeMin, timeMax, viewType, day, month, year) {
     gapi.client.calendar.events.list({
         'calendarId': 'primary',
@@ -53,9 +50,9 @@ function fetchEvents(timeMin, timeMax, viewType, day, month, year) {
         const events = response.result.items || [];
         
         if (viewType === 'month') {
-            displayCalendar(month, year, events); // For month view
+            displayCalendar(month, year, events);
         } else if (viewType === 'day') {
-            displayDailyCalendar(day, month, year, events); // For day view
+            displayDailyCalendar(day, month, year, events);
         }
     }).catch(error => {
         console.error('Error fetching events:', error);
@@ -65,11 +62,8 @@ function fetchEvents(timeMin, timeMax, viewType, day, month, year) {
 function listUpcomingEvents() {
     const timeMin = new Date(currentYear, currentMonth, 1).toISOString();
     const timeMax = new Date(currentYear, currentMonth + 1, 0, 23, 59, 59).toISOString();
-
-    fetchEvents(timeMin, timeMax, 'month', null, currentMonth, currentYear); // Fetch events for the month
+    fetchEvents(timeMin, timeMax, 'month', null, currentMonth, currentYear);
 }
-
-
 
 function displayCalendar(month, year, events = []) {
     const calendarBody = document.getElementById('calendar-body');
@@ -78,17 +72,17 @@ function displayCalendar(month, year, events = []) {
     const firstDayOfMonth = new Date(year, month, 1).getDay();
 
     currentMonthLabel.innerText = `${getMonthName(month)} ${year}`;
-    calendarBody.innerHTML = ''; // Clear previous calendar content
+    calendarBody.innerHTML = '';
 
     let date = 1;
-    for (let i = 0; i < 6; i++) { // Maximum 6 rows for weeks
+    for (let i = 0; i < 6; i++) {
         const row = document.createElement('tr');
-        for (let j = 0; j < 7; j++) { // 7 days in a week
+        for (let j = 0; j < 7; j++) {
             const cell = document.createElement('td');
             if (i === 0 && j < firstDayOfMonth) {
-                cell.innerHTML = ''; // Empty cells before the first day
+                cell.innerHTML = '';
             } else if (date <= daysInMonth) {
-                const currentDate = date; // Capture the correct date for each cell
+                const currentDate = date;
                 const dayEvents = events.filter(event => {
                     const eventDate = new Date(event.start.dateTime || event.start.date);
                     return eventDate.getDate() === currentDate && eventDate.getMonth() === month && eventDate.getFullYear() === year;
@@ -101,14 +95,13 @@ function displayCalendar(month, year, events = []) {
                     });
                 }
 
-                // Add event listener to switch to daily view on day click
                 cell.addEventListener('click', () => {
                     displayDailyCalendar(currentDate, month, year, dayEvents);
                 });
 
                 date++;
             } else {
-                cell.innerHTML = ''; // Empty cells after the last day
+                cell.innerHTML = '';
             }
             row.appendChild(cell);
         }
@@ -118,23 +111,20 @@ function displayCalendar(month, year, events = []) {
 }
 
 function displayDailyCalendar(day, month, year, events = []) {
-    currentView = 'day'; // Switch to day view
-    currentDay = day; // Track the current day
-
+    currentView = 'day';
+    currentDay = day;
 
     const mainContent = document.getElementById('main-content');
 
-
     mainContent.innerHTML = `
         <div id="daily-calendar-navigation">
-        <button class="nav-btn" onclick="loadCalendar(document.getElementById('main-content'))">Month View</button>
-    </div>
-    <div id="daily-calendar"></div>
+            <button class="nav-btn" onclick="loadCalendar(document.getElementById('main-content'))">Month View</button>
+        </div>
+        <div id="daily-calendar"></div>
     `;
 
     const dailyCalendar = document.getElementById('daily-calendar');
 
-    // Create 24-hour time slots
     for (let hour = 0; hour < 24; hour++) {
         const hourBlock = document.createElement('div');
         hourBlock.className = 'hour-block';
@@ -144,7 +134,6 @@ function displayDailyCalendar(day, month, year, events = []) {
             const eventStart = new Date(event.start.dateTime || event.start.date);
             return eventStart.getHours() === hour && eventStart.getDate() === day;
         });
-
 
         if (hourEvents.length > 0) {
             hourEvents.forEach(event => {
@@ -159,10 +148,9 @@ function displayDailyCalendar(day, month, year, events = []) {
     }
 }
 
-// Function to load the calendar
 function loadCalendar(container) {
+    currentView = 'month'; // Reset to month view
     container.innerHTML = `
-
         <table id="calendar-table">
             <thead>
                 <tr>
@@ -181,19 +169,15 @@ function loadCalendar(container) {
     if (googleSignedIn) {
         listUpcomingEvents();
     } else {
-        displayCalendar(currentMonth, currentYear); // Display empty calendar if not signed in
+        displayCalendar(currentMonth, currentYear);
     }
 }
 
 
-// Function to change the current month
-// General function to handle both month and day changes
 function changeDate(direction) {
     if (currentView === 'month') {
-        // Handle month change
         currentMonth += direction;
         
-        // Adjust year if necessary
         if (currentMonth < 0) {
             currentMonth = 11;
             currentYear--;
@@ -202,29 +186,24 @@ function changeDate(direction) {
             currentYear++;
         }
 
-        // Update the displayed month and reload the calendar
         const currentMonthLabel = document.getElementById('current-month');
         currentMonthLabel.innerText = `${getMonthName(currentMonth)} ${currentYear}`;
-        loadCalendar(document.getElementById('main-content'));
-
-    } else if (currentView === 'day') {
-        // Handle day change
+        listUpcomingEvents();
+    } else {
         const newDate = new Date(currentYear, currentMonth, currentDay + direction);
         currentDay = newDate.getDate();
         currentMonth = newDate.getMonth();
         currentYear = newDate.getFullYear();
 
-        // Update the displayed day
         const currentDayLabel = document.getElementById('current-month');
         currentDayLabel.innerText = `${getMonthName(currentMonth)} ${currentDay}, ${currentYear}`;
 
-        // Reload the daily view with the new day
-        listDailyEvents(currentDay, currentMonth, currentYear);
+        displayDailyCalendar(currentDay, currentMonth, currentYear);
     }
 }
 
 
-// Helper function to get the month name
+
 function getMonthName(month) {
     const months = [
         "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
@@ -232,26 +211,9 @@ function getMonthName(month) {
     return months[month];
 }
 
-// Load default view and sync theme on page load
-window.onload = function() {
-    handleClientLoad();  // Initialize Google API and calendar
-    navigateTo('calendar');
-    syncThemeToggle();   // Sync theme state with toggle switch
-
-    // Add event listener for the theme toggle switch
-    const toggleInput = document.querySelector('.toggle-theme-switch input');
-    toggleInput.addEventListener('change', toggleTheme);
-
-    // Attach event listener for the burger menu
-    const burgerMenuButton = document.querySelector('.McButton');
-    burgerMenuButton.addEventListener('click', toggleMenu);
-};
-
-
-// Navigation between sections
 function navigateTo(section) {
     const mainContent = document.getElementById('main-content');
-    mainContent.innerHTML = ''; // Clear previous content
+    mainContent.innerHTML = '';
 
     if (section === 'calendar') {
         loadCalendar(mainContent);
@@ -260,104 +222,90 @@ function navigateTo(section) {
     }
 }
 
-// Toggle burger menu visibility and spin animation
 function toggleMenu() {
-    const menu = document.getElementById('burger-menu');
     const menuIcon = document.querySelector('.McButton');
-    
-    // Toggle the active class for both spin and showing the menu
+    const menu = document.getElementById('burger-menu');
     menuIcon.classList.toggle('active');
     menu.classList.toggle('active');
 }
 
-// Attach click event listener to the burger menu
-document.querySelector('.McButton').addEventListener('click', toggleMenu);
-
-
-
-
-// Hamburger Menu Animation
-$(document).ready(function() {
-    var McButton = $("[data=hamburger-menu]");
-    var McBar1 = McButton.find("b:nth-child(1)");
-    var McBar2 = McButton.find("b:nth-child(2)");
-    var McBar3 = McButton.find("b:nth-child(3)");
-  
-    McButton.click(function() {
-      $(this).toggleClass("active");
-  
-      if (McButton.hasClass("active")) {
-        McBar1.velocity({ top: "50%" }, { duration: 200, easing: "swing" });
-        McBar3.velocity({ top: "50%" }, { duration: 200, easing: "swing" })
-              .velocity({ rotateZ: "90deg" }, { duration: 800, delay: 200, easing: [500, 20] });
-        McButton.velocity({ rotateZ: "135deg" }, { duration: 800, delay: 200, easing: [500, 20] });
-      } else {
-        McButton.velocity("reverse");
-        McBar3.velocity({ rotateZ: "0deg" }, { duration: 800, easing: [500, 20] })
-              .velocity({ top: "100%" }, { duration: 200, easing: "swing" });
-        McBar1.velocity("reverse", { delay: 800 });
-      }
-    });
-  });
-
-// Function to sync the theme toggle with the current mode
 function syncThemeToggle() {
     const body = document.body;
-    const toggleInput = document.getElementById('theme-toggle');  // Get the toggle
-
-    // If dark-mode is active, set the checkbox to checked
-    if (body.classList.contains('dark-mode')) {
-        toggleInput.checked = true;
-    } else {
-        toggleInput.checked = false;
-    }
+    const toggleInput = document.getElementById('theme-toggle');
+    toggleInput.checked = body.classList.contains('dark-mode');
 }
 
-// Function to toggle theme
 function toggleTheme() {
     const body = document.body;
-    const themeToggleCheckbox = document.getElementById('theme-toggle');
+    const toggleInput = document.getElementById('theme-toggle');
+    const isDarkMode = toggleInput.checked;
+    
+    body.classList.toggle('dark-mode', isDarkMode);
+    body.classList.toggle('light-mode', !isDarkMode);
+    
+    localStorage.setItem('modePreference', isDarkMode ? 'dark' : 'light');
+    
+    updateCalendarTheme();
+    updateGoalsTheme();
+}
 
-    // If checked, switch to dark-mode, else light-mode
-    if (themeToggleCheckbox.checked) {
-        body.classList.replace('light-mode', 'dark-mode');
-    } else {
-        body.classList.replace('dark-mode', 'light-mode');
+function updateCalendarTheme() {
+    const calendarTable = document.getElementById('calendar-table');
+    if (calendarTable) {
+        calendarTable.classList.toggle('dark-mode');
     }
 }
 
-
-// Toggle burger menu visibility and spin animation
-function toggleMenu() {
-    const menu = document.getElementById('burger-menu');
-    const menuIcon = document.querySelector('.McButton');
-
-    // Toggle the active class for both spin and showing the menu
-    menuIcon.classList.toggle('active');
-
-    if (menuIcon.classList.contains('active')) {
-        menu.style.display = 'block'; // Show the menu
-        menu.style.animation = 'fadeIn 0.4s forwards'; // Add smooth fade-in animation
-    } else {
-        menu.style.display = 'none'; // Hide the menu
+function updateGoalsTheme() {
+    const goalsContainer = document.getElementById('goals-container');
+    if (goalsContainer) {
+        const goalItems = goalsContainer.querySelectorAll('.goal-item');
+        goalItems.forEach(item => item.classList.toggle('dark-mode'));
     }
 }
-
-// Attach click event listener to the burger menu
-document.querySelector('.McButton').addEventListener('click', toggleMenu);
-
-
-// Window onload function
+function applyTheme() {
+    const isDarkMode = localStorage.getItem('modePreference') === 'dark';
+    document.body.classList.toggle('dark-mode', isDarkMode);
+    document.body.classList.toggle('light-mode', !isDarkMode);
+    document.getElementById('theme-toggle').checked = isDarkMode;
+    updateCalendarTheme();
+    updateGoalsTheme();
+}
 window.onload = function() {
-    handleClientLoad();  // Load Google API and initialize calendar
-    syncThemeToggle();   // Sync theme toggle switch state with the page mode
+    handleClientLoad();
+    navigateTo('calendar');
+    applyModePreference();
 
-    // Add event listener for the theme toggle switch
     const toggleInput = document.getElementById('theme-toggle');
     toggleInput.addEventListener('change', toggleTheme);
 
-    // Add event listener for the burger menu
     const burgerMenuButton = document.querySelector('.McButton');
     burgerMenuButton.addEventListener('click', toggleMenu);
 };
 
+function applyModePreference() {
+    const modePreference = localStorage.getItem('modePreference') || 'light';
+    document.body.classList.add(modePreference + '-mode');
+    document.getElementById('theme-toggle').checked = (modePreference === 'dark');
+}
+
+function resetSurvey() {
+    localStorage.removeItem('surveyCompleted');
+    localStorage.removeItem('hardestGoal');
+    localStorage.removeItem('colorPreference');
+    console.log('Survey reset. Refresh the page to see the survey again.');
+}
+
+window.onload = function() {
+    handleClientLoad();
+    navigateTo('calendar');
+    syncThemeToggle();
+
+    const toggleInput = document.getElementById('theme-toggle');
+    toggleInput.addEventListener('change', toggleTheme);
+
+    const burgerMenuButton = document.querySelector('.McButton');
+    burgerMenuButton.addEventListener('click', toggleMenu);
+};
+
+document.querySelector('.McButton').addEventListener('click', toggleMenu);

@@ -48,16 +48,16 @@
                 <img src="Assets/Logo.png" class="logo"> <!-- Logo -->
             </div>
         </div>
-
-        <nav id="burger-menu">
-            <ul>
-                <li><a href="index.html">Calendar</a></li>
-                <li><a href="achievements.html">Achievements</a></li>
-                <li><a href="todo.html">To-Do</a></li>
-                <li><a href="account.html">Account</a></li>
-            </ul>
-        </nav>
-    </header>
+          <nav id="burger-menu">
+              <ul>
+                  <li><a href="index.html">Calendar</a></li>
+                  <li><a href="achievements.html">Achievements</a></li>
+                  <li><a href="goals.html">Goals</a></li>
+                  <li><a href="todo.html">To-Do</a></li>
+                  <li><a href="account.html">Account</a></li>
+              </ul>
+          </nav>
+      </header>
     
 
     
@@ -84,6 +84,13 @@
     <!-- Google API -->
     <script async defer src="https://apis.google.com/js/api.js"></script>
     <script src="script.js"></script>
-
+    <script src="survey.js"></script>
+    <script>
+        (function() {
+            const modePreference = localStorage.getItem('modePreference') || 'light';
+            document.body.classList.add(modePreference + '-mode');
+            document.getElementById('theme-toggle').checked = (modePreference === 'dark');
+        })();
+    </script>
 </body>
 </html>

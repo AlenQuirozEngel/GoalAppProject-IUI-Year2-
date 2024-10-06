@@ -1,10 +1,12 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achievements - Dream Chaser</title>
+    <title>Todo List - Dream Chaser</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="goals.css">
 </head>
 <body class="dark-mode">
     <header>
@@ -14,7 +16,7 @@
             <b></b>
             <b></b>
         </div>
-        <h1>Achievements</h1>
+        <h1>Todo List</h1>
         <div class="right-section">
             <label class="toggle-theme-switch">
                 <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
@@ -34,14 +36,19 @@
             </ul>
         </nav>
     </header>
-
-    <main>
-        <section id="achievements-content">
-            <h2>Your Achievements</h2>
-            <div id="achievement-list"></div>
-        </section>
-    </main>
-
+      <main>
+          <section id="todo-section">
+              <h2>Your To-Do List</h2>
+              <form id="todo-form">
+                  <input type="text" id="todo-input" placeholder="Add a new task">
+                  <button type="submit" class="nav-btn">Add</button>
+              </form>
+              <h3>Active Tasks</h3>
+              <ul id="active-todo-list"></ul>
+              <h3>Completed Tasks</h3>
+              <ul id="completed-todo-list"></ul>
+          </section>
+      </main>
     <footer>
         <div class="bottom-nav">
             <button class="nav-btn" onclick="location.href='index.html'">Calendar</button>
@@ -55,14 +62,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.min.js"></script>
     <script src="script.js"></script>
-    <script src="achievements.js"></script>
+    <script src="todo.js"></script>
     <script src="survey.js"></script>
     <script>
-    (function() {
-        const modePreference = localStorage.getItem('modePreference') || 'light';
-        document.body.classList.add(modePreference + '-mode');
-        document.getElementById('theme-toggle').checked = (modePreference === 'dark');
-    })();
-</script>
+        (function() {
+            const modePreference = localStorage.getItem('modePreference') || 'light';
+            document.body.classList.add(modePreference + '-mode');
+            document.getElementById('theme-toggle').checked = (modePreference === 'dark');
+        })();
+    </script>
 </body>
 </html>

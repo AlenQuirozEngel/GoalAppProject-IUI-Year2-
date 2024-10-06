@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Achievements - Dream Chaser</title>
+    <title>Account - Dream Chaser</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body class="dark-mode">
     <header>
+
         <div class="McButton" data="hamburger-menu">
             <b></b>
             <b></b>
             <b></b>
             <b></b>
         </div>
-        <h1>Achievements</h1>
+        <h1>Account</h1>
         <div class="right-section">
             <label class="toggle-theme-switch">
                 <input type="checkbox" id="theme-toggle" onclick="toggleTheme()">
@@ -36,13 +37,18 @@
     </header>
 
     <main>
-        <section id="achievements-content">
-            <h2>Your Achievements</h2>
-            <div id="achievement-list"></div>
+        <section id="account-section">
+            <h2>Account Settings</h2>
+
+
+            <div class="account-content">
+                <button id="reset-survey" class="nav-btn">Reset Survey</button>
+            </div>
         </section>
     </main>
 
     <footer>
+
         <div class="bottom-nav">
             <button class="nav-btn" onclick="location.href='index.html'">Calendar</button>
             <button class="nav-btn" onclick="location.href='goals.html'">Goals</button>
@@ -55,14 +61,14 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.5.2/velocity.min.js"></script>
     <script src="script.js"></script>
-    <script src="achievements.js"></script>
+    <script src="account.js"></script>
     <script src="survey.js"></script>
     <script>
-    (function() {
-        const modePreference = localStorage.getItem('modePreference') || 'light';
-        document.body.classList.add(modePreference + '-mode');
-        document.getElementById('theme-toggle').checked = (modePreference === 'dark');
-    })();
-</script>
+        (function() {
+            const modePreference = localStorage.getItem('modePreference') || 'light';
+            document.body.classList.add(modePreference + '-mode');
+            document.getElementById('theme-toggle').checked = (modePreference === 'dark');
+        })();
+    </script>
 </body>
 </html>

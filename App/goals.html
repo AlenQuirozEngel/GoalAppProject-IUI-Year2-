@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Goals</title>
-    <link rel="stylesheet" href="goals.css">
-</head>
-<body class="dark-mode"> <!-- Initially in dark mode -->
+    <title>Goals - Dream Chaser</title>
+    <link rel="stylesheet" href="styles.css">
+</head><body class="dark-mode"> <!-- Initially in dark mode -->
     <!-- Header Section -->
     <header>
         <!-- Burger Menu -->
@@ -44,25 +43,19 @@
 
     <!-- Main Section -->
     <main>
-        <div class="goal-actions">
-            <!-- Add Goal Button -->
-            <button class="nav-btn green-btn" id="add-goal-btn">Add Goal</button>
-            <!-- Remove Goal Button -->
-            <button class="nav-btn red-btn" id="remove-goal-btn" style="float: right;">Remove Goal</button>
-        </div>
-    
-        <!-- Form to add goals -->
-        <section id="goal-form-container"></section> <!-- Goal form will appear here -->
-    
-        <!-- Ranked and Unranked Goal Sections -->
-        <section id="ranked-goals">
-            <h3>Ranked Goals</h3>
-            <div id="ranked-goal-list"></div>
-        </section>
-    
-        <section id="unranked-goals">
-            <h3>Unranked Goals</h3>
-            <div id="unranked-goal-list"></div>
+        <section id="goals-section">
+            <h2>Your Goals</h2>
+            <form id="goal-form">
+                <input type="text" id="goal-name" placeholder="Add a new goal">
+                <select id="goal-category">
+                    <option value="Personal">Personal</option>
+                    <option value="Work">Work</option>
+                    <option value="Health">Health</option>
+                    <option value="Education">Education</option>
+                </select>
+                <button type="submit" class="nav-btn">Add</button>
+            </form>
+            <div id="goals-container"></div>
         </section>
     </main>
     
@@ -80,6 +73,14 @@
 
     <script src="goals.js"></script>
     <script src="script.js"></script> <!-- External script.js to handle the toggle and burger menu -->
+    <script src="survey.js"></script>
+    <script>
+        (function() {
+            const modePreference = localStorage.getItem('modePreference') || 'light';
+            document.body.classList.add(modePreference + '-mode');
+            document.getElementById('theme-toggle').checked = (modePreference === 'dark');
+        })();
+    </script>
 </body>
 </html>
 

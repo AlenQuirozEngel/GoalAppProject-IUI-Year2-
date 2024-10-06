@@ -1,16 +1,12 @@
+:root {
+    --button-color: #87CEEB;
+    --dark-bg: #0a0a24;
+    --light-bg: #f0f0f0;
+    --dark-text: #333;
+    --light-text: white;
+}
+
 /* General styles */
-/* Global body styles */
-body.dark-mode {
-    background-color: #0a0a24;
-    color: white;
-}
-
-body.light-mode {
-    background-color: #f0f0f0;
-    color: #333;
-}
-
-
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -18,334 +14,126 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Light and dark modes */
 body.dark-mode {
-    background-color: #0a0a24;
-    color: white;
+    background-color: var(--dark-bg);
+    color: var(--light-text);
 }
 
 body.light-mode {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: var(--light-bg);
+    color: var(--dark-text);
 }
 
-/* Header layout: Burger menu, month navigation, and toggle */
 /* Header layout */
 header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    background-color: indigo; /* or another color depending on light/dark mode */
+    background-color: indigo;
     color: white;
     position: relative;
 }
 
-/* Right section for the toggle button and logo */
-.right-section {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Space between toggle and logo */
+/* Center all titles */
+h1, h2, h3, h4, h5, h6 {
+    text-align: center;
 }
 
-/* Dark/Light mode toggle button */
-.toggle-theme-btn {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
+/* Ensure consistent header sizes */
+h1 {
+    font-size: 28px;
+    flex-grow: 1;
+    margin: 0;
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h3 {
     font-size: 20px;
-    margin-right: 10px;
 }
 
-/* Logo container */
+h4 {
+    font-size: 18px;
+}
+
+h5 {
+    font-size: 16px;
+}
+
+h6 {
+    font-size: 14px;
+}
+
+/* Consistent colored header styling */
+.colored-header {
+    background-color: indigo;
+    color: white;
+    padding: 10px;
+    margin: 0;
+    text-align: center;
+}
+.right-section {
+    position: absolute;
+    right: 20px;
+}
+
+/* Logo styling */
 .logo-container {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* Forcefully resize the logo */
 .logo {
-    max-width: 60px;  /* Set a maximum width */
-    max-height: 60px; /* Set a maximum height */
-    width: auto;       /* Maintain aspect ratio */
-    height: auto;      /* Maintain aspect ratio */
-    object-fit: contain; /* Ensure it scales without distortion */
-    border-radius: 50%; /* Makes the logo round */
-    border: 2px solid black; /* Optional: Add a border around the logo */
+    max-width: 60px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 2px solid black;
 }
 
-
-
-/* Dark mode toggle styling */
-body.light-mode .toggle-theme-btn {
-    color: black;
-}
-
-/* Optional hover effect */
-.toggle-theme-btn:hover {
-    color: #ffdd57;
-}
-
-/* Center the calendar navigation (Previous, Month, Next) */
-.calendar-navigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1; /* Allow the calendar navigation to expand and center in the header */
-    text-align: center;
-}
-
-/* Ensure the current month is centered between the buttons */
-#current-month {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 0 20px; /* Add space between the buttons and the month */
-}
-
-/* Base styling for all buttons (including the header and "Back to Month") */
-.nav-btn {
-    background-color: #87CEEB; /* Light blue for light mode */
+/* Button styles */
+.nav-btn, 
+button,
+input[type="submit"],
+#todo-form button,
+#goal-form button,
+#achievement-form button {
+    background-color: var(--button-color);
     color: black;
     border: none;
-    width: 120px; /* Set consistent width */
-    height: 45px;  /* Set consistent height */
-    padding: 10px; /* Adjust padding */
+    padding: 10px 20px;
     cursor: pointer;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
-    text-align: center;
-    font-size: 16px; /* Ensure consistent font size */
-}
-
-/* Dark mode color for buttons */
-body.dark-mode .nav-btn {
-    background-color: #ccff99; /* Lime color for dark mode */
-    color: black; /* Text color */
-}
-
-/* Optional hover effect */
-.nav-btn:hover {
-    background-color: #f0f0f0; /* Light gray hover effect */
-}
-
-body.dark-mode .nav-btn:hover {
-    background-color: #b3ff66; /* Lighter lime hover effect */
-}
-
-
-/* Burger menu styling remains unchanged */
-.McButton {
-    cursor: pointer;
-    margin-left: 10px;
-    display: flex;
-    flex-direction: column;
-}
-
-/* Dark/Light mode toggle on the right */
-.toggle-theme-btn {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 20px;
-    margin-right: 10px;
-}
-
-body.light-mode .toggle-theme-btn {
-    color: black;
-}
-
-/* Burger Menu on the left */
-.McButton {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    margin-left: 10px;
-}
-
-.McButton b {
-    width: 30px;
-    height: 3px;
-    background-color: #87CEEB; /* Light blue for light mode */
-    margin-bottom: 5px;
-    transition: all 0.3s ease;
-}
-
-/* Dark mode for burger menu */
-body.dark-mode .McButton b {
-    background-color: #ccff99; /* Lime for dark mode */
-}
-
-/* Toggle theme button on the right */
-.toggle-theme-btn {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 20px;
-    padding: 10px;
-    margin-right: 10px;
-}
-
-body.light-mode .toggle-theme-btn {
-    color: black;
-}
-
-.toggle-theme-btn:hover {
-    color: #ffdd57;
-}
-
-/* Toggle theme button */
-.toggle-theme-btn {
-    background: none;
-    border: none;
-    color: white;
-    cursor: pointer;
-    font-size: 20px;
-}
-
-.toggle-theme-btn:hover {
-    color: #ffdd57;
-}
-
-/* Burger Menu icon */
-.McButton {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    z-index: 1000; /* Make sure it's on top */
-}
-
-.McButton b {
-    width: 30px;
-    height: 3px;
-    background-color: #87CEEB; /* Light blue for light mode */
-    margin-bottom: 5px;
-    transition: all 0.3s ease;
-}
-
-/* Dark mode for burger icon */
-body.dark-mode .McButton b {
-    background-color: #ccff99; /* Lime in dark mode */
-}
-
-/* Active state for the burger icon (spins the bars) */
-.McButton.active b:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
-}
-.McButton.active b:nth-child(2) {
-    opacity: 0;
-}
-.McButton.active b:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
-}
-
-/* Hide the burger menu by default */
-#burger-menu {
-    display: none;
-    position: absolute;
-    top: 60px;
-    left: 20px;
-    background-color: #333;
-    padding: 1rem;
-    border-radius: 8px;
-    z-index: 999; /* Ensure it’s visible above other content */
-}
-
-/* Show the burger menu when active */
-.McButton.active + #burger-menu {
-    display: block;
-    animation: fadeIn 0.4s forwards; /* Smooth fade-in */
-}
-
-/* Fade-in animation */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
-/* Burger menu items */
-#burger-menu ul {
-    list-style: none;
-    padding: 0;
-}
-
-#burger-menu ul li {
-    margin-bottom: 10px;
-}
-
-#burger-menu ul li a {
-    color: white;
-    text-decoration: none;
+    transition: filter 0.3s ease;
     font-size: 16px;
 }
 
-#burger-menu ul li a:hover {
-    text-decoration: underline;
+body.dark-mode .nav-btn,
+body.dark-mode button,
+body.dark-mode input[type="submit"],
+body.dark-mode #todo-form button,
+body.dark-mode #goal-form button,
+body.dark-mode #achievement-form button {
+    filter: brightness(0.8);
+    color: white;
 }
 
-/* Specific styles for the "Back to Month" button */
-.back-btn {
-    width: 100px; /* Make it square */
-    height: 100px; /* Make it square */
-    font-size: 18px; /* Increase font size */
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    align-items: center; /* Center text inside */
+.nav-btn:hover,
+button:hover,
+input[type="submit"]:hover,
+#todo-form button:hover,
+#goal-form button:hover,
+#achievement-form button:hover {
+    filter: brightness(1.1);
 }
 
-/* Dark mode styling for the back button */
-body.dark-mode .back-btn {
-    background-color: #ccff99; /* Lime color for dark mode */
-}
-
-/* Light mode styling for the back button */
-body.light-mode .back-btn {
-    background-color: #87CEEB; /* Light blue for light mode */
-}
-
-/* Optional: Add hover effect for the button */
-.nav-btn:hover {
-    background-color: #f0f0f0; /* Light gray hover effect for light mode */
-}
-
-body.dark-mode .nav-btn:hover {
-    background-color: #b3ff66; /* Lighter lime hover effect for dark mode */
-}
-
-/* Bottom navigation buttons */
-.bottom-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 10px; /* Space between buttons */
-    width: fit-content; /* Match the width of the buttons to content size */
-    margin: 0 auto; /* Center the bottom-nav within the page */
-    background-color: white;
-    padding: 1rem;
-    border-radius: 50px; /* Small rounded shape */
-}
-
-body.dark-mode .bottom-nav {
-    background-color: #3f0699; /* Dark purple for dark mode */
-}
-
-
-.nav-btn:hover {
-    background-color: #f0f0f0;
-}
-
-/* Calendar styles with rounded corners */
+/* Calendar styles */
 #calendar-table {
     width: 100%;
     border-collapse: collapse;
@@ -359,35 +147,19 @@ body.dark-mode .bottom-nav {
     border-radius: 8px;
 }
 
-
-#calendar-table td {
-    background-color: #000000;
-}
-
-/* Calendar cells (squares) in dark mode */
 body.dark-mode #calendar-table td {
-    background-color: black; /* Black background for dark mode */
-    color: white; /* White text for dark mode */
+    background-color: black;
+    color: white;
 }
 
-/* Calendar cells (squares) in light mode */
 body.light-mode #calendar-table td {
-    background-color: #FFFFE0; /* Light yellow background for light mode */
-    color: black; /* Black text for light mode */
+    background-color: #FFFFE0;
+    color: black;
 }
 
-/* Optional: Hover effect for calendar cells */
 #calendar-table td:hover {
-    opacity: 0.8; /* Slightly transparent on hover */
+    opacity: 0.8;
 }
-
-/* Optional: Hover effect for calendar cells in dark mode */
-body.dark-mode #calendar-table td:hover {
-    background-color: #333; /* A brighter black (dark gray) on hover */
-    opacity: 1; /* Full opacity */
-    cursor: pointer; /* Pointer cursor to indicate interactivity */
-}
-
 
 /* Event styling */
 .event {
@@ -397,21 +169,20 @@ body.dark-mode #calendar-table td:hover {
     padding: 5px 10px;
     border-radius: 8px;
 }
-/* Slider toggle switch */
+
+/* Toggle switch */
 .toggle-theme-switch {
     position: relative;
     display: inline-block;
-    width: 50px; /* Width of the slider */
-    height: 25px; /* Height of the slider */
-    margin-right: 10px; /* Space on the right for layout */
+    width: 50px;
+    height: 25px;
+    margin-right: 10px;
 }
 
-/* Hide the default checkbox input */
 .toggle-theme-switch input {
     display: none;
 }
 
-/* The slider track (background stays indigo, but border changes) */
 .slider {
     position: absolute;
     cursor: pointer;
@@ -419,52 +190,430 @@ body.dark-mode #calendar-table td:hover {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: black; /* Indigo background for both modes */
+    background-color: black;
     transition: 0.4s;
-    border-radius: 30px; /* Fully rounded slider (cylinder shape) */
-    border: 2px solid #87CEEB; /* Light blue border for light mode */
+    border-radius: 30px;
+    border: 2px solid var(--button-color);
 }
 
-/* The ball inside the slider */
 .slider:before {
     position: absolute;
     content: "";
-    height: 18px; /* Adjusted size to fit perfectly inside the slider */
-    width: 18px;  /* Make the ball slightly smaller than the slider's height */
-    left: 2px; /* Start position of the ball */
+    height: 18px;
+    width: 18px;
+    left: 2px;
     bottom: 2px;
-    background-color: #ccff99; /* Default color for dark mode */
+    background-color: #ccff99;
     transition: 0.4s;
-    border-radius: 50%; /* Make it circular */
+    border-radius: 50%;
 }
 
-/* When the checkbox is checked (dark mode) */
 input:checked + .slider {
-    border-color: #ccff99; /* Lime green border for dark mode */
+    border-color: #ccff99;
 }
 
-
-/* Move the ball to the right and change its color */
 input:checked + .slider:before {
-    transform: translateX(24px); /* Move the ball to the right (adjusted value) */
-    background-color: #87CEEB; /* ball in light mode */
+    transform: translateX(24px);
+    background-color: var(--button-color);
 }
 
-/* Light mode ball color */
-body.light-mode input:not(:checked) + .slider:before {
-    background-color: #87CEEB; /* Light blue ball in light mode */
+/* Burger menu */
+.McButton {
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1000;
 }
 
-/* Light mode border color */
-body.light-mode .slider {
-    border-color: #87CEEB; /* Light blue border for light mode */
+.McButton b {
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: var(--button-color);
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
 }
 
-/* Dark mode ball and border color */
-body.dark-mode .slider {
-    border-color: #ccff99; /* Lime green border for dark mode */
+body.dark-mode .McButton b {
+    background-color: #ccff99;
 }
 
-body.dark-mode .slider:before {
-    background-color: #ccff99; /* Lime green ball in dark mode */
+.McButton.active b:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
 }
+
+.McButton.active b:nth-child(2) {
+    opacity: 0;
+}
+
+.McButton.active b:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+#burger-menu {
+    position: fixed;
+    top: 60px;
+    left: 20px;
+    background-color: #333;
+    padding: 1rem;
+    border-radius: 8px;
+    z-index: 999;
+    display: none;
+}
+
+#burger-menu.active {
+    display: block;
+}
+
+#burger-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#burger-menu ul li {
+    margin-bottom: 10px;
+}
+
+#burger-menu ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+#burger-menu ul li a:hover {
+    text-decoration: underline;
+}
+
+/* Todo section */
+#todo-section {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    text-align: center;
+}
+
+#todo-form {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+#todo-input {
+    width: 70%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#todo-input:focus {
+    outline: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#todo-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+#todo-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#todo-list input[type="checkbox"] {
+    display: none;
+}
+
+#todo-list label {
+    position: relative;
+    padding-left: 35px;
+    cursor: pointer;
+    font-size: 18px;
+    user-select: none;
+}
+
+#todo-list label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--button-color);
+    border-radius: 4px;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+#todo-list input[type="checkbox"]:checked + label::before {
+    background-color: var(--button-color);
+}
+
+#todo-list input[type="checkbox"]:checked + label::after {
+    content: '✓';
+    position: absolute;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+    font-size: 16px;
+}
+
+/* Add this to styles.css */
+
+.goal-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    color: white;
+    position: relative;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.goal-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.goal-category {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.goal-name {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.delete-btn {
+    position: absolute;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.goal-item:hover .delete-btn {
+    opacity: 1;
+}
+
+
+.delete-btn {
+    position: absolute;
+    right: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.goal-item:hover .delete-btn {
+    opacity: 1;
+}
+
+/* Achievements styles */
+#achievements-content {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+}
+
+body.dark-mode #achievements-content,
+body.dark-mode #todo-section {
+    background-color: #0a0a24;
+    color: white;
+}
+
+.achievement-item {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+body.dark-mode .achievement-item {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+.progress-container {
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    background-color: #e0e0e0;
+    border-radius: 5px;
+    height: 20px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    background-color: var(--button-color);
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.achievements-section {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.achievement-box {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 15px;
+    text-align: center;
+    flex: 1 1 calc(50% - 10px);
+}
+
+body.dark-mode .achievement-box {
+    background-color: #3a3a3a;
+    color: white;
+}
+
+/* Survey styles */
+#survey-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#survey-container {
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 2rem;
+    border-radius: 10px;
+    max-width: 500px;
+    width: 90%;
+}
+
+body.dark-mode #survey-container {
+    background-color: #2a2a2a;
+    color: white;
+}
+
+#survey-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#survey-form label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+#survey-form select, #survey-form button {
+    padding: 0.5rem;
+    font-size: 1rem;
+    background-color: white;
+    color: #333;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+body.dark-mode #survey-form select, 
+body.dark-mode #survey-form button {
+    background-color: #3a3a3a;
+    color: white;
+    border-color: #555;
+}
+
+/* Bottom navigation */
+.bottom-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    width: fit-content;
+    margin: 0 auto;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 50px;
+}
+
+body.dark-mode .bottom-nav {
+    background-color: #3f0699;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .bottom-nav {
+        flex-wrap: wrap;
+    }
+
+    #calendar-table th, #calendar-table td {
+        padding: 5px;
+        font-size: 14px;
+    }
+
+    .achievement-box {
+        flex: 1 1 100%;
+    }
+}
+
+/* Print styles */
+@media print {
+    .no-print {
+        display: none;
+    }
+
+    body {
+        font-size: 12pt;
+    }
+
+    #calendar-table {
+        width: 100%;
+    }
+}
+
+.calendar-title {
+    font-size: 32px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--dark-text);
+}
+
+body.dark-mode .calendar-title {
+    color: var(--light-text);
+}
+  .calendar-navigation {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+  }
+
+  .calendar-navigation button {
+      background-color: transparent;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      padding: 0 20px;
+  }
+
+  #current-date {
+      font-size: 24px;
+      margin: 0 20px;
+  }
