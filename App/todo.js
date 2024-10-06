@@ -48,11 +48,20 @@ function deleteTodo(index) {
 }
   document.addEventListener('DOMContentLoaded', function() {
     applyTheme();
-      renderTodos();
-      document.getElementById('todo-form').addEventListener('submit', addTodo);
-  });
-  function saveTodos() {
+    renderTodos();
+    document.getElementById('todo-form').addEventListener('submit', addTodo);
+});  function saveTodos() {
       localStorage.setItem('todos', JSON.stringify(todos));
   }
 
 
+
+function applyButtonColor() {
+    const colorPreference = localStorage.getItem('colorPreference');
+    if (colorPreference) {
+        const buttons = document.querySelectorAll('.nav-btn, button[type="submit"]');
+        buttons.forEach(button => {
+            button.style.backgroundColor = colorPreference;
+        });
+    }
+}

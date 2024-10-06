@@ -24,7 +24,6 @@ body.light-mode {
     color: var(--dark-text);
 }
 
-/* Header layout */
 header {
     display: flex;
     justify-content: space-between;
@@ -32,58 +31,39 @@ header {
     padding: 1rem;
     background-color: indigo;
     color: white;
-    position: relative;
 }
 
-/* Center all titles */
-h1, h2, h3, h4, h5, h6 {
-    text-align: center;
+.left-section, .right-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
 }
 
-/* Ensure consistent header sizes */
-h1 {
-    font-size: 28px;
-    flex-grow: 1;
-    margin: 0;
+.left-section {
+    justify-content: flex-start;
 }
 
-h2 {
-    font-size: 24px;
-}
-
-h3 {
-    font-size: 20px;
-}
-
-h4 {
-    font-size: 18px;
-}
-
-h5 {
-    font-size: 16px;
-}
-
-h6 {
-    font-size: 14px;
-}
-
-/* Consistent colored header styling */
-.colored-header {
-    background-color: indigo;
-    color: white;
-    padding: 10px;
-    margin: 0;
-    text-align: center;
-}
 .right-section {
-    position: absolute;
-    right: 20px;
+    justify-content: flex-end;
 }
 
-/* Logo styling */
-.logo-container {
+.calendar-navigation {
+    flex: 2;
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.McButton {
+    margin-right: 1rem;
+}
+
+.toggle-theme-switch {
+    margin-right: 1rem;
+}
+
+.logo-container {
+    display: flex;
     align-items: center;
 }
 
@@ -617,3 +597,13 @@ body.dark-mode .calendar-title {
       font-size: 24px;
       margin: 0 20px;
   }
+
+.achievements h1,
+.todo h1,
+.account h1 {
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+}

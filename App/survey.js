@@ -11,14 +11,21 @@ function showSurvey() {
                             <option value="study">Study</option>
                             <option value="sport">Sport</option>
                             <option value="work">Work</option>
+                            <option value="health">Health</option>
+                            <option value="personal">Personal</option>
+                            <option value="life-goal" hidden>Life Goal</option>
                         </select>
                     </label>
                     <label>
-                        What color do you like more?
+                        Choose your preferred color theme:
                         <select name="color-preference" required>
-                            <option value="red">Red</option>
-                            <option value="green">Green</option>
-                            <option value="blue">Blue</option>
+                            <option value="#7E57C2">Muted Purple</option>
+                            <option value="#5C6BC0">Muted Indigo</option>
+                            <option value="#42A5F5">Muted Blue</option>
+                            <option value="#26A69A">Muted Teal</option>
+                            <option value="#66BB6A">Muted Green</option>
+                            <option value="#FFCA28">Muted Amber</option>
+                            <option value="#FF7043">Muted Deep Orange</option>
                         </select>
                     </label>
                     <label>
@@ -51,7 +58,6 @@ function showSurvey() {
         applyModePreference();
     });
 }
-
 function applyModePreference() {
     const modePreference = localStorage.getItem('modePreference');
     if (modePreference) {
@@ -61,13 +67,27 @@ function applyModePreference() {
     }
 }
 
+  function applyColorPreference() {
+      const colorPreference = localStorage.getItem('colorPreference');
+      if (colorPreference) {
+          document.documentElement.style.setProperty('--button-color', colorPreference);
+        
+          // Convert hex to RGB, then darken
+          let rgb = hexToRgb(colorPreference);
+          let darkerColor = `rgb(${rgb.r * 0.8}, ${rgb.g * 0.8}, ${rgb.b * 0.8})`;
+        
+          document.querySelector('header').style.backgroundColor = darkerColor;
+      }
+  }
 
-function applyColorPreference() {
-    const colorPreference = localStorage.getItem('colorPreference');
-    if (colorPreference) {
-        document.documentElement.style.setProperty('--button-color', colorPreference, 'important');
-    }
-}
+  function hexToRgb(hex) {
+      let bigint = parseInt(hex.slice(1), 16);
+      return {
+          r: (bigint >> 16) & 255,
+          g: (bigint >> 8) & 255,
+          b: bigint & 255
+      };
+  }
 document.addEventListener('DOMContentLoaded', function() {
     applyTheme();
     if (!localStorage.getItem('surveyCompleted')) {
