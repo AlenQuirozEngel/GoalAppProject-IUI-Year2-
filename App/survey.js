@@ -6,6 +6,16 @@ function showSurvey() {
                 <p>Please answer these quick questions to get started:</p>
                 <form id="survey-form">
                     <label>
+                        What type of goal is your favorite?
+                        <select name="favorite-goal" required>
+                            <option value="study">Study</option>
+                            <option value="sport">Sport</option>
+                            <option value="work">Work</option>
+                            <option value="health">Health</option>
+                            <option value="personal">Personal</option>
+                        </select>
+                    </label>
+                    <label>
                         What type of goal is the hardest for you?
                         <select name="hardest-goal" required>
                             <option value="study">Study</option>
@@ -13,7 +23,6 @@ function showSurvey() {
                             <option value="work">Work</option>
                             <option value="health">Health</option>
                             <option value="personal">Personal</option>
-                            <option value="life-goal" hidden>Life Goal</option>
                         </select>
                     </label>
                     <label>
@@ -44,11 +53,13 @@ function showSurvey() {
     
     document.getElementById('survey-form').addEventListener('submit', function(e) {
         e.preventDefault();
+        const favoriteGoal = this.elements['favorite-goal'].value;
         const hardestGoal = this.elements['hardest-goal'].value;
         const colorPreference = this.elements['color-preference'].value;
         const modePreference = this.elements['mode-preference'].value;
         
         localStorage.setItem('surveyCompleted', 'true');
+        localStorage.setItem('favoriteGoal', favoriteGoal);
         localStorage.setItem('hardestGoal', hardestGoal);
         localStorage.setItem('colorPreference', colorPreference);
         localStorage.setItem('modePreference', modePreference);
@@ -57,8 +68,7 @@ function showSurvey() {
         applyColorPreference();
         applyModePreference();
     });
-}
-function applyModePreference() {
+}function applyModePreference() {
     const modePreference = localStorage.getItem('modePreference');
     if (modePreference) {
         document.body.classList.remove('dark-mode', 'light-mode');

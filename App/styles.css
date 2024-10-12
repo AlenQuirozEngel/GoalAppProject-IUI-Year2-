@@ -607,3 +607,21 @@ body.dark-mode .calendar-title {
     left: 0;
     right: 0;
 }
+
+.task-box {
+    padding: 5px;
+    margin: 2px 0;
+    border-radius: 3px;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+}
+
+.task-box {
+    padding: 5px;
+    margin: 2px 0;
+    border-radius: 3px;
+    font-size: 12px;
+    color: white;
+    text-align: center;
+}

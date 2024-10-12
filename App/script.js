@@ -115,15 +115,21 @@ function displayDailyCalendar(day, month, year, events = []) {
     currentDay = day;
 
     const mainContent = document.getElementById('main-content');
-
     mainContent.innerHTML = `
         <div id="daily-calendar-navigation">
             <button class="nav-btn" onclick="loadCalendar(document.getElementById('main-content'))">Month View</button>
+            <button class="nav-btn" onclick="showAddTaskModal()">Add Task</button>
+            <button class="nav-btn" onclick="showRemoveTaskModal()">Remove Task</button>
         </div>
         <div id="daily-calendar"></div>
     `;
 
     const dailyCalendar = document.getElementById('daily-calendar');
+
+    // Get scheduled tasks for the day
+    const scheduledTasks = getScheduledTasksForDay(day, month, year);
+
+    const hourBlocks = [];
 
     for (let hour = 0; hour < 24; hour++) {
         const hourBlock = document.createElement('div');
@@ -135,19 +141,70 @@ function displayDailyCalendar(day, month, year, events = []) {
             return eventStart.getHours() === hour && eventStart.getDate() === day;
         });
 
-        if (hourEvents.length > 0) {
+        const hourTasks = scheduledTasks.filter(task => task.hour === hour);
+
+        if (hourEvents.length > 0 || hourTasks.length > 0) {
+            const itemsContainer = document.createElement('div');
+            itemsContainer.className = 'hour-items';
+
             hourEvents.forEach(event => {
                 const eventDiv = document.createElement('div');
                 eventDiv.className = 'event';
                 eventDiv.innerText = `${event.summary} (${new Date(event.start.dateTime).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })})`;
-                hourBlock.appendChild(eventDiv);
+                itemsContainer.appendChild(eventDiv);
             });
+
+            hourTasks.forEach(task => {
+                const taskDiv = document.createElement('div');
+                taskDiv.className = 'task-box';
+                taskDiv.style.backgroundColor = getCategoryColor(task.category);
+                taskDiv.innerText = task.name;
+                itemsContainer.appendChild(taskDiv);
+            });
+
+            hourBlock.appendChild(itemsContainer);
         }
 
         dailyCalendar.appendChild(hourBlock);
+        hourBlocks.push(hourBlock);
     }
+
+    const customTasks = JSON.parse(localStorage.getItem('customTasks')) || [];
+    customTasks.forEach(task => {
+        if (task.hour >= 0 && task.hour < 24) {
+            const taskDiv = document.createElement('div');
+            taskDiv.className = 'task-box';
+            taskDiv.style.backgroundColor = task.color;
+            taskDiv.innerText = task.name;
+            hourBlocks[task.hour].querySelector('.hour-items').appendChild(taskDiv);
+        }
+    });
+}
+function getCategoryColor(category) {
+    const colorPreferences = JSON.parse(localStorage.getItem('colorPreferences')) || {};
+    return colorPreferences[category] || '#87CEEB'; // Default color if not set
 }
 
+function getScheduledTasksForDay(day, month, year) {
+    const goals = JSON.parse(localStorage.getItem('goals')) || [];
+    const scheduledTasks = [];
+    
+    goals.forEach(goal => {
+        const multiplier = getTaskMultiplier(goal.category);
+        const taskCount = Math.floor(Math.random() * 3 * multiplier) + 1; // 1 to 3 tasks, adjusted by multiplier
+        
+        for (let i = 0; i < taskCount; i++) {
+            const hour = Math.floor(Math.random() * 24);
+            scheduledTasks.push({
+                name: goal.name,
+                category: goal.category,
+                hour: hour
+            });
+        }
+    });
+    
+    return scheduledTasks;
+}
 function loadCalendar(container) {
     currentView = 'month'; // Reset to month view
     container.innerHTML = `
@@ -309,3 +366,127 @@ window.onload = function() {
 };
 
 document.querySelector('.McButton').addEventListener('click', toggleMenu);
+
+function scheduleGoalTasks() {
+    const goals = JSON.parse(localStorage.getItem('goals')) || [];
+    const favoriteCategory = localStorage.getItem('favoriteGoal');
+    const hardestCategory = localStorage.getItem('hardestGoal');
+    
+    goals.sort((a, b) => b.ranking - a.ranking);
+    
+    goals.forEach(goal => {
+        let priority = goal.ranking / goals.length;
+        
+        if (goal.category === favoriteCategory) {
+            priority += 0.2; // Increase priority for favorite category
+        }
+        
+        if (goal.category === hardestCategory) {
+            priority -= 0.1; // Decrease priority for hardest category
+        }
+        
+        if (priority > 0.5) { // Adjust this threshold as needed
+            // Schedule task logic here
+            // You'll need to implement this based on your calendar data structure
+            // Use the 'priority' value to determine how often or when to schedule tasks
+        }
+    });
+}
+
+function getTaskMultiplier(category) {
+    const favoriteCategory = localStorage.getItem('favoriteGoal');
+    const hardestCategory = localStorage.getItem('hardestGoal');
+    
+    if (category === favoriteCategory) return 1;
+    if (category === hardestCategory) return 0.3;
+    return 0.6; // Default multiplier for other categories
+}
+
+function showAddTaskModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Add Task</h2>
+            <select id="task-category">
+                ${getGoalOptions()}
+                <option value="other">Other</option>
+            </select>
+            <input type="text" id="task-name" placeholder="Task Name">
+            <input type="color" id="task-color" value="#000000">
+            <input type="number" id="task-hour" min="0" max="23" placeholder="Hour (0-23)">
+            <button onclick="addTask()">Add Task</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function showRemoveTaskModal() {
+    const modal = document.createElement('div');
+    modal.className = 'modal';
+    modal.innerHTML = `
+        <div class="modal-content">
+            <h2>Remove Task</h2>
+            <select id="remove-task-select">
+                ${getTaskOptions()}
+            </select>
+            <button onclick="removeTask()">Remove Task</button>
+            <button onclick="closeModal()">Cancel</button>
+        </div>
+    `;
+    document.body.appendChild(modal);
+}
+
+function getGoalOptions() {
+    const goals = JSON.parse(localStorage.getItem('goals')) || [];
+    return goals.map(goal => `<option value="${goal.category}">${goal.name}</option>`).join('');
+}
+
+function getTaskOptions() {
+    const tasks = JSON.parse(localStorage.getItem('customTasks')) || [];
+    return tasks.map((task, index) => `<option value="${index}">${task.name}</option>`).join('');
+}
+
+function closeModal() {
+    document.querySelector('.modal').remove();
+}
+
+function addTask() {
+    const category = document.getElementById('task-category').value;
+    const name = document.getElementById('task-name').value;
+    const color = document.getElementById('task-color').value;
+    const hour = parseInt(document.getElementById('task-hour').value);
+
+    if (category === 'other') {
+        const currentDate = getCurrentDate();
+        const dailyTasks = JSON.parse(localStorage.getItem('dailyTasks')) || {};
+        
+        if (!dailyTasks[currentDate]) {
+            dailyTasks[currentDate] = [];
+        }
+        
+        dailyTasks[currentDate].push({ name, color, hour });
+        localStorage.setItem('dailyTasks', JSON.stringify(dailyTasks));
+    } else {
+        const tasks = JSON.parse(localStorage.getItem('customTasks')) || [];
+        tasks.push({ category, name, color, hour });
+        localStorage.setItem('customTasks', JSON.stringify(tasks));
+    }
+
+    closeModal();
+    displayDailyCalendar(currentDay, currentMonth, currentYear);
+}function removeTask() {
+    const index = document.getElementById('remove-task-select').value;
+    const tasks = JSON.parse(localStorage.getItem('dailyTasks')) || [];
+    tasks.splice(index, 1);
+    localStorage.setItem('dailyTasks', JSON.stringify(tasks));
+
+    closeModal();
+    displayDailyCalendar(currentDay, currentMonth, currentYear);
+}
+
+function getCurrentDate() {
+    const now = new Date();
+    return `${now.getFullYear()}-${(now.getMonth() + 1).toString().padStart(2, '0')}-${now.getDate().toString().padStart(2, '0')}`;
+}

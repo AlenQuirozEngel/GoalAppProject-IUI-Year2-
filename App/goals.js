@@ -1,16 +1,23 @@
 // Store goals in localStorage
 let goals = JSON.parse(localStorage.getItem('goals')) || [];
-
-// Render goals
-function renderGoals() {
-    const container = document.getElementById('goals-container');
-    container.innerHTML = '';
-    goals.forEach((goal, index) => {
-        const goalElement = createGoalElement(goal, index);
-        container.appendChild(goalElement);
-    });
-}
-
+  // Render goals
+  function renderGoals() {
+      const container = document.getElementById('goals-container');
+      container.innerHTML = '';
+      const colorPreferences = JSON.parse(localStorage.getItem('colorPreferences')) || {};
+    
+      goals.forEach((goal, index) => {
+          const goalElement = document.createElement('div');
+          goalElement.classList.add('goal-item');
+          goalElement.style.backgroundColor = colorPreferences[goal.category] || getCategoryColor(goal.category);
+          goalElement.innerHTML = `
+              <span class="goal-category">${goal.category}</span>
+              <span class="goal-name">${goal.name}</span>
+              <button class="delete-btn" onclick="deleteGoal(${index})">Delete</button>
+          `;
+          container.appendChild(goalElement);
+      });
+  }
 // Create a goal element
 function createGoalElement(goal, index) {
     const goalElement = document.createElement('div');
@@ -74,17 +81,21 @@ function drop(e) {
 
 // Save goals to localStorage
 function saveGoals() {
+    goals.forEach((goal, index) => {
+        goal.ranking = goals.length - index;
+    });
     localStorage.setItem('goals', JSON.stringify(goals));
 }
 
 // Get category color
 function getCategoryColor(category) {
     const colors = {
-        "Personal": '#36d1dc',
-        "Work": '#56ab2f',
-        "Health": '#ff7043',
-        "Education": '#f7971e',
-        "Creative/Personal": '#9d50bb'
+        "study": '#4CAF50',    // Green
+        "sport": '#2196F3',    // Blue
+        "work": '#FFC107',     // Amber
+        "health": '#E91E63',   // Pink
+        "personal": '#9C27B0', // Purple
+        "life-goal": '#FF5722' // Deep Orange
     };
     return colors[category] || '#87CEEB'; // Default color
 }
@@ -135,3 +146,41 @@ function toggleMenu() {
     document.getElementById('burger-menu').classList.toggle('active');
 }
 
+function populateGoalCategoryDropdown() {
+    const dropdown = document.getElementById('goal-category');
+    dropdown.innerHTML = ''; // Clear existing options
+    const categories = [
+        { value: 'Personal', color: '#36d1dc' },
+        { value: 'Work', color: '#56ab2f' },
+        { value: 'Health', color: '#ff7043' },
+        { value: 'Education', color: '#f7971e' },
+        { value: 'Sport', color: '#9d50bb' },
+        { value: 'Life Goal', color: '#FF5722' }
+    ];
+
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.value;
+        option.textContent = category.value;
+        option.style.backgroundColor = category.color;
+        option.style.color = 'white';
+        dropdown.appendChild(option);
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    saveColorPreferences();
+    populateGoalCategoryDropdown();
+    renderGoals();
+});
+function saveColorPreferences() {
+    const colorPreferences = {
+        'Personal': '#36d1dc',
+        'Work': '#56ab2f',
+        'Health': '#ff7043',
+        'Education': '#f7971e',
+        'Sport': '#9d50bb',
+        'Life Goal': '#FF5722'
+    };
+    localStorage.setItem('colorPreferences', JSON.stringify(colorPreferences));
+}
